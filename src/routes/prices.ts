@@ -1,10 +1,7 @@
 import express, {IRouter} from 'express';
-
-import { protect, persist } from '../controller/authentication';
-
+import { prices } from '../controller/prices';
 const router: IRouter = express.Router();
 
-router.get('/persist', protect, persist);
-
+router.get('/', prices);
 
 export default router;
