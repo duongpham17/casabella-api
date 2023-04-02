@@ -1,0 +1,39 @@
+.container{
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    grid-template-areas:
+    "users edit";
+
+    .users{
+        grid-area: users;
+        padding: 0.5rem;
+    }
+
+    .edit{
+        grid-area: edit;
+
+        form{
+            margin-top: 0.5rem;
+            position: sticky;
+            top: 0.5rem;
+            padding: 0.5rem;
+            background-color: var(--clr-dark-transparent);
+
+            .roles{ 
+                margin: 1rem 0;
+                button{
+                    border-radius: 5px;
+                    padding: 0.5rem 2rem;
+                }
+                .selected{
+                    background-color: black;
+                    color: white;
+                }
+            }
+        }
+    }
+    
+}

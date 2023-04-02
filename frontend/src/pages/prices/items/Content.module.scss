@@ -1,0 +1,61 @@
+.container{
+    header{
+        text-align: right;
+        margin-bottom: 1rem;
+        button{
+            font-weight: 200;
+            &:hover{
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .mainTitle, .subsets {
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+    }
+
+    .mainTitle{
+        padding: 0.5rem;
+        background-color: var(--clr-light-transparent);
+        border: 1px solid transparent;
+        button{
+            width: 100%;
+            font-size: 1.2rem
+        }
+        &:hover{
+            background-color: var(--clr-grey);
+            border-color: var(--clr-main);
+        }
+    }
+
+    .subsets{
+        .element{
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            background-color: var(--clr-light-transparent);
+            border: 1px solid transparent;
+            text-align: center;
+            &:hover{
+                border-color: var(--clr-main);
+            }
+
+            p{
+                &:hover{
+                    opacity: 0.5;
+                }
+            }
+            
+            button{
+                margin: 1rem auto;
+                border-radius: 5px;
+                padding: 0.5rem 1rem;
+                background-color: var(--clr-grey);
+                color: white;
+            }
+        }
+        .subsetEditSelected{
+            border: 2px solid var(--clr-main);
+        }
+    }
+}

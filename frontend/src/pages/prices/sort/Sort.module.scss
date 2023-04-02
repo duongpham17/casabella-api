@@ -1,0 +1,31 @@
+.container{
+    cursor: pointer;
+    
+    .element{
+        background-color: var(--clr-dark-transparent);
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        border: 2px solid transparent;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        button{
+            border-radius: 5px;
+            background-color: var(--clr-light-transparent);
+            padding: 0.5rem;
+            display: flex;
+            &:hover{
+                background-color: var(--clr-red);
+                svg{
+                    color: white ;
+                }
+            }
+        }
+    }
+    .selected{
+        border: 2px solid var(--clr-blue);
+    }
+
+}

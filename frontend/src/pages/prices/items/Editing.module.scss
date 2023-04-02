@@ -1,0 +1,44 @@
+.container{
+    position: sticky;
+    top: 1rem;
+
+    .actionsContainer{
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        position: relative;
+        svg{
+            display: flex;
+        }
+        .buttons{
+            width: 100%;
+        }
+        .other{
+            width: 40px;
+            display: flex;
+            align-items: center; 
+        }
+        .delete{
+            width: 40px;
+            display: flex;
+            align-items: center;
+            p{
+                background-color: red;
+                color: white;
+            }
+        }
+        .delete:hover .message{
+            display: block;
+        }
+        .message{
+            display: none;
+            bottom: -2.5rem;
+            right: 0;
+            position: absolute;
+            background-color: white;
+            border: 1px solid var(--clr-dark-transparent);
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.container{
+    margin: 1rem 0;
+
+    button{
+        background-color: var(--clr-light-transparent);
+        padding: 1rem;
+        min-width: 100px;
+        border-radius: 5px;
+        transition: 0.3s ease-in-out;
+        border: 2px solid var(--clr-light-transparent);
+        margin-right: 0.5rem;
+
+        &:hover{
+        opacity: 0.5;
+        }
+    }
+    .selected{
+        border-color: black;
+    }
+}
