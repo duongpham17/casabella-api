@@ -42,7 +42,7 @@ const Login = () => {
                     <p>Check your email for the code</p>
                     <Codes amount={6} callback={(code: string) => onSetValue({code}) } />
                     {authState.errors && <small>{authState.errors.code}</small>}
-                    <Button label1={<span>&#x2192;</span>} loading={loading} color="main" />
+                    <Button type="submit" label1={<span>&#x2192;</span>} loading={loading} color="main" />
                 </Form>
                 :
                 <Form onSubmit={onSubmit} width={350} button={false} >
