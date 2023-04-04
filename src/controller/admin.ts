@@ -4,6 +4,8 @@ import { InjectUserToRequest } from '../@types/models';
 
 import User from '../model/users';
 import Prices from '../model/prices';
+import Services from '../model/services';
+import Reviews from '../model/reviews';
 
 export const get_users = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
 
@@ -75,5 +77,102 @@ export const delete_prices = asyncBlock(async (req: InjectUserToRequest, res: Re
     res.status(201).json({
         status: "success",
         data: prices
+    });
+});
+
+export const get_services = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
+
+    const services = await Services.find().sort({createdAt: -1});
+
+    if(!services) return next(new appError('cannot update services data', 401));
+
+    res.status(201).json({
+        status: "success",
+        data: services
+    });
+});
+
+export const create_services = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
+
+    const services = await Services.create({...req.body, createdAt: new Date()});
+
+    if(!services) return next(new appError('cannot update services data', 401));
+
+    res.status(201).json({
+        status: "success",
+        data: services
+    });
+});
+
+export const update_services = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
+
+    const services = await Services.findByIdAndUpdate(req.body._id, req.body, {new: true});
+
+    if(!services) return next(new appError('cannot update services data', 401));
+
+    res.status(201).json({
+        status: "success",
+        data: services
+    });
+});
+
+export const delete_services = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
+
+    const services = await Services.findByIdAndDelete(req.params.id);
+
+    if(!services) return next(new appError('cannot update services data', 401));
+
+    res.status(201).json({
+        status: "success",
+        data: services
+    });
+});
+
+
+export const get_reviews = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
+
+    const reviews = await Reviews.find().sort({createdAt: -1});
+
+    if(!reviews) return next(new appError('cannot update reviews data', 401));
+
+    res.status(201).json({
+        status: "success",
+        data: reviews
+    });
+});
+
+export const create_reviews = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
+
+    const reviews = await Reviews.create({...req.body, createdAt: new Date()});
+
+    if(!reviews) return next(new appError('cannot update reviews data', 401));
+
+    res.status(201).json({
+        status: "success",
+        data: reviews
+    });
+});
+
+export const update_reviews = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
+
+    const reviews = await Reviews.findByIdAndUpdate(req.body._id, req.body, {new: true});
+
+    if(!reviews) return next(new appError('cannot update reviews data', 401));
+
+    res.status(201).json({
+        status: "success",
+        data: reviews
+    });
+});
+
+export const delete_reviews = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
+
+    const reviews = await Reviews.findByIdAndDelete(req.params.id);
+
+    if(!reviews) return next(new appError('cannot update reviews data', 401));
+
+    res.status(201).json({
+        status: "success",
+        data: reviews
     });
 });

@@ -5,22 +5,22 @@ import useFetch from '@redux/hooks/useFetch';
 
 import Items from './items';
 import Actions from './actions';
-import Sort from './sort';
+import Edit from './edit';
 
 const Prices = () => {
 
     useFetch(Admin.prices());
 
-    const [sortPriceList, setSortPriceList] = useState(false)
+    const [editPrice, setEditPrice] = useState(false)
 
     return (
         <div className={styles.container}>
 
-            <Actions sortPriceList={sortPriceList} setSortPriceList={setSortPriceList} />
+            <Actions editPrice={editPrice} setEditPrice={setEditPrice} />
 
-            { sortPriceList 
+            { editPrice 
                 ?
-                    <Sort />
+                    <Edit />
                 :
                     <Items />
             }

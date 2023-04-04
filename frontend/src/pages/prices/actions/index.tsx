@@ -3,11 +3,11 @@ import { useAppDispatch, useAppSelector } from '@redux/hooks/useRedux';
 import Admin from '@redux/actions/admin';
 
 interface Props {
-    sortPriceList: boolean,
-    setSortPriceList: React.Dispatch<React.SetStateAction<boolean>>
+    editPrice: boolean,
+    setEditPrice: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Actions = ({sortPriceList, setSortPriceList}: Props) => {
+const Actions = ({editPrice, setEditPrice}: Props) => {
 
     const dispatch = useAppDispatch();
 
@@ -21,8 +21,8 @@ const Actions = ({sortPriceList, setSortPriceList}: Props) => {
     return (
         <div className={styles.container}>
             
-            <button onClick={onCreate}>new category</button>
-            {!!prices?.length && <button onClick={() => setSortPriceList(!sortPriceList)} className={sortPriceList ? styles.selected : ""}>{sortPriceList ? "editing" : "edit"}</button>}
+           {!editPrice && <button onClick={onCreate}>new category</button>}
+            <button onClick={() => setEditPrice(!editPrice)} className={editPrice ? styles.selected : ""}>{editPrice ? "editing" : "edit"}</button>
 
         </div>
     )

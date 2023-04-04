@@ -18,6 +18,8 @@ const Home = () => {
             <ul>
               <li><Link to="/users">Users</Link></li>
               <li><Link to="/prices">Prices</Link></li>
+              <li><Link to="/services">Services</Link></li>
+              <li><Link to="/reviews">Reviews</Link></li>
             </ul>
           </div>
       }

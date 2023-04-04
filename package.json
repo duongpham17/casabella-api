@@ -32,6 +32,7 @@
     "jsonwebtoken": "^8.5.1",
     "kucoin-futures-node-api": "^1.0.8",
     "mongoose": "^6.4.0",
+    "nft.storage": "^7.0.3",
     "nodemailer": "^6.7.5",
     "xss-clean": "^0.1.1"
   }

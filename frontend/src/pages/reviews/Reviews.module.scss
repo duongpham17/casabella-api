@@ -1,0 +1,18 @@
+.container{
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+
+    h3{
+        text-align: center;
+        margin-top: 2rem ;
+    }
+
+    .items{
+        display: inline-flex;
+        flex-wrap: wrap;
+        margin: 1rem auto;
+        justify-content: center;
+        padding: 40px calc((100% - (300px * 3)) / 2);
+    }
+}

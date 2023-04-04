@@ -3,6 +3,8 @@ import { Dispatch } from 'redux';
 import { ACTION_ADMIN, TYPES_ADMIN } from '@redux/types/admin';
 import { IUser } from '@redux/types/user';
 import { IPrice } from '@redux/types/prices';
+import { IService } from '@redux/types/services';
+import { IReview } from '@redux/types/reviews';
 
 const users = () => async (dispatch: Dispatch<ACTION_ADMIN>) => {
     try{
@@ -79,14 +81,126 @@ const prices_delete = (data: IPrice) => async (dispatch: Dispatch<ACTION_ADMIN>)
     }
 };
 
+const services = () => async (dispatch: Dispatch<ACTION_ADMIN>) => {
+    try{
+        const res = await api.get(`/admin/services`);
+        dispatch({
+            type: TYPES_ADMIN.ADMIN_SERVICES_GET,
+            payload: res.data.data
+        });
+    } catch (error: any) {
+        console.log("Please reload")
+    }
+};
+
+const services_create = () => async (dispatch: Dispatch<ACTION_ADMIN>) => {
+    try{
+        const res = await api.post(`/admin/services`);
+        dispatch({
+            type: TYPES_ADMIN.ADMIN_SERVICES_CREATE,
+            payload: res.data.data
+        });
+    } catch (error: any) {
+        console.log("Please reload")
+    }
+};
+
+const services_update = (data: IService) => async (dispatch: Dispatch<ACTION_ADMIN>) => {
+    try{
+        const res = await api.patch(`/admin/services`, data);
+        dispatch({
+            type: TYPES_ADMIN.ADMIN_SERVICES_UPDATE,
+            payload: res.data.data
+        });
+    } catch (error: any) {
+        console.log(error.response)
+        console.log("Please reload")
+    }
+};
+
+const services_delete = (data: IService) => async (dispatch: Dispatch<ACTION_ADMIN>) => {
+    try{
+        const res = await api.delete(`/admin/services/${data._id}`);
+        dispatch({
+            type: TYPES_ADMIN.ADMIN_SERVICES_DELETE,
+            payload: res.data.data
+        });
+    } catch (error: any) {
+        console.log(error.response)
+        console.log("Please reload")
+    }
+};
+
+const reviews = () => async (dispatch: Dispatch<ACTION_ADMIN>) => {
+    try{
+        const res = await api.get(`/admin/reviews`);
+        dispatch({
+            type: TYPES_ADMIN.ADMIN_REVIEWS_GET,
+            payload: res.data.data
+        });
+    } catch (error: any) {
+        console.log("Please reload")
+    }
+};
+
+const reviews_create = (data: Partial<IReview>) => async (dispatch: Dispatch<ACTION_ADMIN>) => {
+    try{
+        const res = await api.post(`/admin/reviews`, data);
+        dispatch({
+            type: TYPES_ADMIN.ADMIN_REVIEWS_CREATE,
+            payload: res.data.data
+        });
+    } catch (error: any) {
+        console.log("Please reload")
+    }
+};
+
+const reviews_update = (data: IReview) => async (dispatch: Dispatch<ACTION_ADMIN>) => {
+    try{
+        const res = await api.patch(`/admin/reviews`, data);
+        dispatch({
+            type: TYPES_ADMIN.ADMIN_REVIEWS_UPDATE,
+            payload: res.data.data
+        });
+    } catch (error: any) {
+        console.log(error.response)
+        console.log("Please reload")
+    }
+};
+
+const reviews_delete = (data: IReview) => async (dispatch: Dispatch<ACTION_ADMIN>) => {
+    try{
+        const res = await api.delete(`/admin/reviews/${data._id}`);
+        dispatch({
+            type: TYPES_ADMIN.ADMIN_REVIEWS_DELETE,
+            payload: res.data.data
+        });
+    } catch (error: any) {
+        console.log(error.response)
+        console.log("Please reload")
+    }
+};
+
+
 
 const Admin = {
     users,
     users_update,
+
     prices,
     prices_create,
     prices_update,
-    prices_delete
+    prices_delete,
+
+    services,
+    services_create,
+    services_update,
+    services_delete,
+
+    reviews,
+    reviews_create,
+    reviews_update,
+    reviews_delete,
 }
 
 export default Admin

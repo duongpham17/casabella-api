@@ -8,6 +8,8 @@ import Confirm from 'pages/confirm';
 import Login from 'pages/login';
 import Users from './users';
 import Prices from './prices';
+import Services from './services';
+import Reviews from './reviews';
 import Unknown from 'pages/unknown';
 
 const Pages = () => {
@@ -20,6 +22,8 @@ const Pages = () => {
 
         <Route path="/users" element={<Private component={Users} roles={["admin"]}/> } />
         <Route path="/prices" element={<Private component={Prices} roles={["admin"]}/> } />
+        <Route path="/services" element={<Private component={Services} roles={["admin"]}/> } />
+        <Route path="/reviews" element={<Private component={Reviews} roles={["admin"]}/> } />
 
         <Route path="*" element={<Unknown/>} />
       </Routes>
