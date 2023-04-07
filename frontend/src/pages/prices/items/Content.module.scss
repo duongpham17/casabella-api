@@ -1,21 +1,11 @@
 .container{
-    header{
-        text-align: right;
-        margin-bottom: 1rem;
-        button{
-            font-weight: 200;
-            &:hover{
-                opacity: 0.5;
-            }
-        }
-    }
 
-    .mainTitle, .subsets {
+    .subsetTitleContainer, .subsetItemsContainer {
         margin-bottom: 0.5rem;
         cursor: pointer;
     }
 
-    .mainTitle{
+    .subsetTitleContainer{
         padding: 0.5rem;
         background-color: var(--clr-light-transparent);
         border: 1px solid transparent;
@@ -29,7 +19,7 @@
         }
     }
 
-    .subsets{
+    .subsetItemsContainer, .editContainer{
         .element{
             padding: 0.5rem;
             margin-bottom: 1rem;
@@ -54,8 +44,9 @@
                 color: white;
             }
         }
-        .subsetEditSelected{
+        .selected{
             border: 2px solid var(--clr-main);
         }
     }
+
 }

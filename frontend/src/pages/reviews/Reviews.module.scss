@@ -5,14 +5,19 @@
 
     h3{
         text-align: center;
-        margin-top: 2rem ;
+        margin: 2rem 0;
     }
 
     .items{
-        display: inline-flex;
-        flex-wrap: wrap;
-        margin: 1rem auto;
-        justify-content: center;
-        padding: 40px calc((100% - (300px * 3)) / 2);
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+
+        @media (max-width: 800px){
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 500px){
+            grid-template-columns: 1fr;
+        }
     }
 }

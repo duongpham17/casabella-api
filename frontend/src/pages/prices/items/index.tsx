@@ -4,23 +4,24 @@ import { IPrice } from '@redux/types/prices';
 
 import Editing from './Editing';
 import Content from './Content';
-import useContext from './useContext';
+import UseContext from './useContext';
 
 const Item = ({data, index}: {data: IPrice, index: number}) => {
-    const context = useContext({data, index});
-  
+
     return (
-      <div className={styles.container}>
+      <UseContext data={data} index={index}>
+        <div className={styles.container}>
 
-        <div className={styles.content}>
-            <Content {...context} />
-        </div>
+          <div className={styles.content}>
+              <Content />
+          </div>
 
-        <div className={styles.editing}>
-            <Editing {...context} />
-        </div>
+          <div className={styles.editing}>
+              <Editing />
+          </div>
 
-      </div>    
+        </div>    
+      </UseContext>
     )
 }
 

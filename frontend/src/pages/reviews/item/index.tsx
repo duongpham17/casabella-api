@@ -34,7 +34,7 @@ const Item = ({review, index}:Props) => {
     return (
         <form className={styles.container} onSubmit={onSubmit}>
             <div className={styles.delete}>
-                <p>{index+1}</p>
+                <p>{index+1}.</p>
                 {loadingDelete ? <Spinner size={12}/>  : <button onClick={onDelete}> delete <MdKeyboardArrowRight/> </button>}
             </div>
             <input name="title" value={values.title} placeholder="Title" onChange={onChange} />
