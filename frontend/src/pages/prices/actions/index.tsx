@@ -22,7 +22,8 @@ const Actions = ({editPrice, setEditPrice}: Props) => {
         <div className={styles.container}>
             
            {!editPrice && <button onClick={onCreate}>new category</button>}
-            <button onClick={() => setEditPrice(!editPrice)} className={editPrice ? styles.selected : ""}>{editPrice ? "editing" : "edit"}</button>
+
+            <button onClick={() => setEditPrice(!editPrice)} className={editPrice ? styles.selected : ""}>{editPrice ? "done" : "sort"}</button>
 
         </div>
     )

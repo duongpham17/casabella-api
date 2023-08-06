@@ -3,7 +3,6 @@ import { useState } from 'react';
 import styles from './Table.module.scss';
 import { useAppDispatch } from '@redux/hooks/useRedux';
 import { HiMenuAlt4 } from 'react-icons/hi';
-import { cloneObject } from '@utils/functions';
 import Admin from '@redux/actions/admin';
 
 interface Props {
@@ -27,20 +26,28 @@ const Table = ({subset, onSelectEdit, data}: Props) => {
 
     const onPosition = (index: number) => (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         e.stopPropagation();
+
         if(position === -1) return setPosition(index);
         if(position === index) return setPosition(-1);
-        //update children : subset[index].item[index]
-        const new_subset = cloneObject(subset);
-        const update_item = new_subset.items[position];
-        new_subset.items.splice(position, 1);
-        new_subset.items.splice(index, 0, update_item);
-        //update parent : price.subsets[index]
-        const findSubsetIndex = (subsetId: string) => data.subsets.findIndex(el => el.id === subsetId);
-        const subsetIndex = findSubsetIndex(new_subset.id);
-        const new_data = cloneObject(data);
-        new_data.subsets[subsetIndex] = new_subset;
-        setCloneSubset(new_subset)
-        dispatch(Admin.prices_update(new_data));
+
+        const first_selected_item = subset.items[position];
+        const second_selected_item = subset.items[index];
+        
+        //replace each other values
+        const new_subset = {...cloneSubset};
+        new_subset.items[position] = second_selected_item;
+        new_subset.items[index] = first_selected_item;
+        
+        //update main document
+        const new_price_list = {...data};  
+        const subset_index = new_price_list.subsets.findIndex(el => el.id === new_subset.id);
+        new_price_list.subsets[subset_index] = new_subset;
+
+        // //update databse
+        dispatch(Admin.prices_update(new_price_list));
+
+        //reset 
+        setCloneSubset(new_subset);
         setPosition(-1);
     };
 
@@ -51,7 +58,7 @@ const Table = ({subset, onSelectEdit, data}: Props) => {
                 <thead>
                     <tr>
                         <th className={styles.name}>TREATMENT</th>
-                        <th>SINGLE PRICE</th>
+                        <th>PRICE</th>
                         {cloneSubset.type === "bulk" &&
                             <th className={styles.bulk}>
                                 <span>BUY 3+</span>
@@ -67,6 +74,7 @@ const Table = ({subset, onSelectEdit, data}: Props) => {
 
                             <td className={styles.name}>
                                 <div>
+                                    <span>{index+1}. </span>
                                     <HiMenuAlt4 onClick={onPosition(index)} className={`${styles.icon} ${index === position ? styles.selected : ""}`}/>
                                     <span>{el.name}</span>
                                     {el.discount > 0 && <span>{el.discount}% OFF</span>}

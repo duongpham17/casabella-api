@@ -54,10 +54,10 @@ const Users = () => {
                 </Search>
             </div>
 
-            <div className={styles.edit}>
-                {values.email &&
-                    <form onSubmit={onSubmit}>
-                    <p>{values.email}</p>
+            {values.email &&
+                <div className={styles.edit} onClick={() => onSetValue({email: ""})}>
+                    <form onSubmit={onSubmit} onClick={(e) => e.stopPropagation()}>
+                        <p>{values.email}</p>
 
                         <div className={styles.roles}>
                             <button onClick={() => onSetValue({role: "admin"})} type="button" className={values.role === "admin" ? styles.selected : ""}>admin</button>
@@ -66,8 +66,8 @@ const Users = () => {
 
                         <Button type="submit" label1="update" color="main" loading={loading} />
                     </form>
-                }
-            </div>
+                </div>
+            }
 
         </div>
     )

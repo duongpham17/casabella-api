@@ -1,17 +1,32 @@
 .container{
+    border: 2px solid var(--clr-grey);
+    margin: 5rem 0;
+
+    .actionsContainer{
+        display: flex;
+        justify-content: left;
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+
+    .editContainer{
+        .title{
+            padding: 1rem;
+        }
+    }
 
     .subsetTitleContainer, .subsetItemsContainer {
-        margin-bottom: 0.5rem;
         cursor: pointer;
     }
 
     .subsetTitleContainer{
+        margin: 0.5rem;
         padding: 0.5rem;
-        background-color: var(--clr-light-transparent);
+        background-color: var(--clr-grey);
         border: 1px solid transparent;
         button{
             width: 100%;
-            font-size: 1.2rem
+            font-size: 2rem
         }
         &:hover{
             background-color: var(--clr-grey);
@@ -22,7 +37,7 @@
     .subsetItemsContainer, .editContainer{
         .element{
             padding: 0.5rem;
-            margin-bottom: 1rem;
+            margin: 0.5rem;
             background-color: var(--clr-light-transparent);
             border: 1px solid transparent;
             text-align: center;
@@ -31,6 +46,7 @@
             }
 
             p{
+                font-size: 1.3rem;
                 &:hover{
                     opacity: 0.5;
                 }

@@ -17,7 +17,7 @@ const Actions = ({editServices, setEditServices}: Props) => {
     return (
         <div className={styles.container}>
            {!editServices && <button onClick={onCreate}>new service</button>}
-            <button onClick={() => setEditServices(!editServices)} className={ editServices ? styles.selected : ""}>{editServices ? "editing" : "edit"}</button>
+            <button onClick={() => setEditServices(!editServices)} className={ editServices ? styles.selected : ""}>{editServices ? "done" : "sort"}</button>
         </div>
     )
 }   

@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.confirmWithCode = exports.confirmWithEmail = exports.login = exports.persist = exports.protect = exports.restrictTo = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const _email_1 = require("../@email");
+const authentication_1 = require("../@email/authentication");
 const helper_1 = require("../@utils/helper");
 const users_1 = __importDefault(require("../model/users"));
-const authentication_1 = require("../middleware/authentication");
+const authentication_2 = require("../middleware/authentication");
 const restrictTo = (...roles) => {
     return (req, res, next) => {
         if (!roles.includes(req.user.role)) {
@@ -46,13 +46,17 @@ exports.persist = (0, helper_1.asyncBlock)(async (req, res, next) => {
 exports.login = (0, helper_1.asyncBlock)(async (req, res, next) => {
     const email = req.body.email;
     let user = await users_1.default.findOne({ email });
+    const host = req.headers.referer;
+    if (!host)
+        return next(new helper_1.appError("Host is unknown", 401));
     if (user) {
         const { code, hashToken } = user.createVerifyToken();
-        const confirmURL = `confirm/${`${code}-${hashToken}`}`;
-        await (0, _email_1.emailLogin)({
+        const confirmURL = `${host}confirm/${`${code}-${hashToken}`}`;
+        await (0, authentication_1.EMAIL_LOGIN)({
             email: user.email,
             url: confirmURL,
-            code
+            host,
+            code,
         });
     }
     ;
@@ -60,9 +64,10 @@ exports.login = (0, helper_1.asyncBlock)(async (req, res, next) => {
         user = await users_1.default.create({ email, verified: false });
         const { code, hashToken } = user.createVerifyToken();
         const confirmURL = `confirm/${code}-${hashToken}`;
-        await (0, _email_1.emailSignup)({
+        await (0, authentication_1.EMAIL_SIGNUP)({
             email: user.email,
             url: confirmURL,
+            host,
             code
         });
     }
@@ -87,7 +92,7 @@ exports.confirmWithEmail = (0, helper_1.asyncBlock)(async (req, res, next) => {
     user = await users_1.default.findOneAndUpdate({ confirmation }, { $unset: { code: 1, confirmation: 1, verified: 1, link_expiration_time: 1 } }, { new: true });
     if (!user)
         return next(new helper_1.appError("User does not exist, signup again.", 401));
-    const cookie = (0, authentication_1.createSecureToken)(user._id);
+    const cookie = (0, authentication_2.createSecureToken)(user._id);
     res.status(200).json({
         status: "success",
         data: user,
@@ -108,7 +113,7 @@ exports.confirmWithCode = (0, helper_1.asyncBlock)(async (req, res, next) => {
     user = await users_1.default.findOneAndUpdate({ email }, { $unset: { code: 1, confirmation: 1, verified: 1, link_expiration_time: 1 } }, { new: true });
     if (!user)
         return next(new helper_1.appError("Invalid code", 401));
-    const cookie = (0, authentication_1.createSecureToken)(user._id);
+    const cookie = (0, authentication_2.createSecureToken)(user._id);
     res.status(200).json({
         status: "success",
         data: user,

@@ -1,4 +1,3 @@
-import styles from './Item.module.scss';
 import { useAppSelector } from '@redux/hooks/useRedux';
 import { IPrice } from '@redux/types/prices';
 
@@ -10,17 +9,11 @@ const Item = ({data, index}: {data: IPrice, index: number}) => {
 
     return (
       <UseContext data={data} index={index}>
-        <div className={styles.container}>
 
-          <div className={styles.content}>
-              <Content />
-          </div>
+        <Content />
 
-          <div className={styles.editing}>
-              <Editing />
-          </div>
+        <Editing />
 
-        </div>    
       </UseContext>
     )
 }

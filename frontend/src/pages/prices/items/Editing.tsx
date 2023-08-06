@@ -17,21 +17,23 @@ import Checkbox from '@components/inputs/Checkbox';
 import Flex from '@components/flex/Flex';
 
 const Wrapper = ({onSubmit, onDelete, loading, children, message, setEditArea}: {onSubmit: any, onDelete: any, loading: boolean, children: ReactNode, message: string, setEditArea: CallableFunction}) => (
-    <form onSubmit={onSubmit}>
-        <div className={styles.actionsContainer}>
-            <div className={`${styles.buttons} ${styles.other}`}>
-                <Button type="button" onClick={() => setEditArea("")} label1={<MdClose/>} color="light" />
+    <div className={styles.wrapper} onClick={() => setEditArea("")}>
+        <form onSubmit={onSubmit} onClick={e => e.stopPropagation()}>
+            <div className={styles.actions}>
+                <div className={`${styles.buttons} ${styles.other}`}>
+                    <Button type="button" onClick={() => setEditArea("")} label1={<MdClose/>} color="light" />
+                </div>
+                <div className={`${styles.buttons}`}>
+                    <Button type="submit" label1="update" color="main" loading={loading} />
+                </div>
+                <div className={`${styles.buttons} ${styles.delete}`}>
+                    <Button type="button" onClick={onDelete} label1={<BsTrash/>} color="light" />
+                    <p className={styles.message}>{message}</p>
+                </div>
             </div>
-            <div className={`${styles.buttons}`}>
-                <Button type="submit" label1="update" color="main" loading={loading} />
-            </div>
-            <div className={`${styles.buttons} ${styles.delete}`}>
-                <Button type="button" onClick={onDelete} label1={<BsTrash/>} color="light" />
-                <p className={styles.message}>{message}</p>
-            </div>
-        </div>
-        {children}
-    </form>
+            {children}
+        </form>
+    </div>
 );
 
 const EditTitle = () => {
@@ -174,7 +176,7 @@ const Editing = () => {
 
             {editArea === "items" && <EditItem />}
         </div>
-  )
+    )
 }
 
 export default Editing

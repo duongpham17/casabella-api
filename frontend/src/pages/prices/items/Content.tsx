@@ -10,16 +10,34 @@ import Table from './Table';
 
 import Button from '@components/buttons/Button';
 import Text from '@components/text/Style1';
-import Flex from '@components/flex/Flex';
+
+const Actions = () => {
+    const { editOptions, initialState, onEditOptions, setInitialState } = useContext(Context);
+
+    const onAddSubsets = () => {
+        setInitialState(state => ({ ...state, 
+            subsets: [ ...state.subsets, 
+                { id: generateid(), title: `Subset ${generateid()}`, type: "price", bulk_discount: 0, items: [] } 
+            ] 
+        }));
+    };
+
+    return (
+        <div className={styles.actionsContainer}>
+            {initialState.subsets.length >= 2 ? <Button label1={editOptions.set ? "done" : "sort subset"} color="black" onClick={onEditOptions} /> : <div></div>}
+            <Button label1="new subset" color="black" onClick={onAddSubsets}/>
+        </div>
+    )
+};
 
 const Edit = () => {
 
     const dispatch = useAppDispatch();
 
-    const { editOptions, initialState, onSelectEdit, setEditOptions, findSubsetIndex, loadingWrapper, setInitialState } = useContext(Context);
+    const { editOptions, initialState, setEditOptions, findSubsetIndex, loadingWrapper } = useContext(Context);
 
-    const onEditSubsetPosition = (subset: IPriceSubsets) => {
-        onSelectEdit("subsets", subset);
+    const onEditSubsetPosition = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, subset: IPriceSubsets) => {
+        e.stopPropagation();
         if(editOptions.data === null) return setEditOptions({...editOptions, data: subset});
         const data_new_position = {...initialState};
         const old_subset_index = findSubsetIndex(editOptions.data.id);
@@ -32,8 +50,11 @@ const Edit = () => {
 
     return (
         <div className={styles.editContainer}>
+            <div className={styles.title}>
+                <Text name="Category" value={initialState.title} size={20}  /> 
+            </div>
             {initialState.subsets.map((s, index) => 
-                <div className={`${styles.element} ${editOptions.data?.id === s.id ? styles.selected : ""}`} key={s.id} onClick={() => onEditSubsetPosition(s)}>
+                <div className={`${styles.element} ${editOptions.data?.id === s.id ? styles.selected : ""}`} key={s.id} onClick={(e) => onEditSubsetPosition(e, s)}>
                     <Text name={`${index+1}. Subset`} value={s.title} />
                 </div>
             )}
@@ -79,31 +100,12 @@ const SubsetItems = () => {
     )
 };
 
-const Actions = () => {
-    const { editOptions, initialState, onEditOptions, setInitialState } = useContext(Context);
-
-    const onAddSubsets = () => {
-        setInitialState(state => ({ ...state, 
-            subsets: [ ...state.subsets, 
-                { id: generateid(), title: "Subset", type: "price", bulk_discount: 0, items: [] } 
-            ] 
-        }));
-    };
-
-    return (
-        <Flex>
-            {initialState.subsets.length >= 2 ? <Button label1={editOptions.set ? "done" : "edit"} color="dark" onClick={onEditOptions} style={{width: "80px"}} /> : <div></div>}
-            <Button label1="new subset" color="dark" onClick={onAddSubsets} />
-        </Flex>
-    )
-};
-
 const Content = () => {
     const { editOptions } = useContext(Context);
 
     return (
         <div className={styles.container}>
-
+            <Actions />
             {editOptions.set 
                 ?        
                     <Edit />
@@ -113,8 +115,6 @@ const Content = () => {
                     <SubsetItems />
                 </>
             }
-
-            <Actions />
         </div>
     )
 }

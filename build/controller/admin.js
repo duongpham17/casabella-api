@@ -9,6 +9,7 @@ const users_1 = __importDefault(require("../model/users"));
 const prices_1 = __importDefault(require("../model/prices"));
 const services_1 = __importDefault(require("../model/services"));
 const reviews_1 = __importDefault(require("../model/reviews"));
+// USERS -----------------------------------------------------------------------------------
 exports.get_users = (0, helper_1.asyncBlock)(async (req, res, next) => {
     const data = await users_1.default.find();
     if (!data)
@@ -27,6 +28,7 @@ exports.update_users = (0, helper_1.asyncBlock)(async (req, res, next) => {
         data: user
     });
 });
+// PRICES -----------------------------------------------------------------------------------
 exports.get_prices = (0, helper_1.asyncBlock)(async (req, res, next) => {
     const prices = await prices_1.default.find().sort({ createdAt: -1 });
     if (!prices)
@@ -63,6 +65,7 @@ exports.delete_prices = (0, helper_1.asyncBlock)(async (req, res, next) => {
         data: prices
     });
 });
+// SERVICES -----------------------------------------------------------------------------------
 exports.get_services = (0, helper_1.asyncBlock)(async (req, res, next) => {
     const services = await services_1.default.find().sort({ createdAt: -1 });
     if (!services)
@@ -99,6 +102,7 @@ exports.delete_services = (0, helper_1.asyncBlock)(async (req, res, next) => {
         data: services
     });
 });
+// REVIEWS -----------------------------------------------------------------------------------
 exports.get_reviews = (0, helper_1.asyncBlock)(async (req, res, next) => {
     const reviews = await reviews_1.default.find().sort({ createdAt: -1 });
     if (!reviews)

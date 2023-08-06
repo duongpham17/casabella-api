@@ -1,26 +1,28 @@
 .container{
     max-width: 1000px;
     margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    grid-template-areas:
-    "users edit";
 
     .users{
-        grid-area: users;
         padding: 0.5rem;
     }
 
     .edit{
-        grid-area: edit;
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(23, 23, 23, 0.355);
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
 
         form{
-            margin-top: 0.5rem;
-            position: sticky;
-            top: 0.5rem;
-            padding: 0.5rem;
-            background-color: var(--clr-dark-transparent);
+            padding: 1rem;
+            background-color: white;
+            width: clamp(250px, 500px, 700px);
+            border-radius: 5px;
 
             .roles{ 
                 margin: 1rem 0;

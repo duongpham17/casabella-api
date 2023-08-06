@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { emailSignup, emailLogin } from '../@email';
+import { EMAIL_SIGNUP, EMAIL_LOGIN } from '../@email/authentication';
 import { asyncBlock, appError } from '../@utils/helper';
 import { InjectUserToRequest } from '../@types/models';
 
@@ -58,15 +58,20 @@ export const login = asyncBlock(async(req: Request, res: Response, next: NextFun
 
     let user = await User.findOne({email});
 
+    const host = req.headers.referer;
+    
+    if(!host) return next(new appError("Host is unknown", 401))
+
     if(user){
         const {code, hashToken} = user.createVerifyToken();
 
-        const confirmURL = `confirm/${`${code}-${hashToken}`}`;
+        const confirmURL = `${host}confirm/${`${code}-${hashToken}`}`;
     
-        await emailLogin({
+        await EMAIL_LOGIN({
             email: user.email,
             url: confirmURL,
-            code
+            host,
+            code,
         });
     };
 
@@ -77,9 +82,10 @@ export const login = asyncBlock(async(req: Request, res: Response, next: NextFun
 
         const confirmURL = `confirm/${code}-${hashToken}`;
     
-        await emailSignup({
+        await EMAIL_SIGNUP({
             email: user.email,
             url: confirmURL,
+            host,
             code
         });
     };
@@ -111,7 +117,7 @@ export const confirmWithEmail = asyncBlock(async (req: Request, res: Response, n
 
     if(!user) return next(new appError("User does not exist, signup again.", 401));
 
-    const cookie = createSecureToken(user._id);
+    const cookie = createSecureToken(user._id as string);
 
     res.status(200).json({
         status: "success",
@@ -139,7 +145,7 @@ export const confirmWithCode = asyncBlock(async (req: Request, res: Response, ne
     
     if(!user) return next(new appError("Invalid code", 401));
 
-    const cookie = createSecureToken(user._id);
+    const cookie = createSecureToken(user._id as string);
 
     res.status(200).json({
         status: "success",

@@ -7,6 +7,8 @@ import Prices from '../model/prices';
 import Services from '../model/services';
 import Reviews from '../model/reviews';
 
+// USERS -----------------------------------------------------------------------------------
+
 export const get_users = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
 
     const data = await User.find();
@@ -30,6 +32,9 @@ export const update_users = asyncBlock(async (req: InjectUserToRequest, res: Res
         data: user
     });
 });
+
+
+// PRICES -----------------------------------------------------------------------------------
 
 export const get_prices = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
 
@@ -80,6 +85,9 @@ export const delete_prices = asyncBlock(async (req: InjectUserToRequest, res: Re
     });
 });
 
+
+// SERVICES -----------------------------------------------------------------------------------
+
 export const get_services = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
 
     const services = await Services.find().sort({createdAt: -1});
@@ -128,6 +136,7 @@ export const delete_services = asyncBlock(async (req: InjectUserToRequest, res: 
     });
 });
 
+// REVIEWS -----------------------------------------------------------------------------------
 
 export const get_reviews = asyncBlock(async (req: InjectUserToRequest, res: Response, next: NextFunction) => {
 
