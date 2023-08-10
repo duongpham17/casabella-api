@@ -78,7 +78,16 @@ const SubsetItems = () => {
     const onAddItem = (subsets: IPriceSubsets) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation();
         const data = {...initialState}
-        const initialItem = {id: generateid(), name: "", price: 0, discount: 0, bulk_discount: false, bulk_price: 0, subsetId: subsets.id};
+        const initialItem = {
+            id: generateid(), 
+            subsetId: subsets.id,
+            name: "", 
+            description: "", 
+            price: 0, 
+            discount: 0, 
+            bulk_discount: false, 
+            bulk_price: 0, 
+        };
         const subsetIndex = findSubsetIndex(subsets.id);
         const subsetsItems = data.subsets[subsetIndex].items;
         subsetsItems[subsetsItems.length] = initialItem;

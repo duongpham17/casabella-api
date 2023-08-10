@@ -45,7 +45,7 @@ export const Context = createContext<PropsTypes>({
     setEditTitle: () => null,
     editSubsets: {},
     setEditSubsets: () => null,
-    editItem: { id: "", subsetId: "", name: "", price: 0, discount: 0, bulk_discount: false, bulk_price: 0},
+    editItem: { id: "", subsetId: "", name: "", description: "", price: 0, discount: 0, bulk_discount: false, bulk_price: 0},
     setEditItem: () => {},
     findSubsetIndex: () => 0 ,
     loadingWrapper: async() => {},
@@ -67,7 +67,7 @@ const UseContext = ({data, index, children}:ContextTypesProps) => {
 
     const [editSubsets, setEditSubsets] = useState<any>({});
 
-    const [editItem, setEditItem] = useState<IPricesItem>({ id: "", subsetId: "", name: "", price: 0, discount: 0, bulk_discount: false, bulk_price: 0});
+    const [editItem, setEditItem] = useState<IPricesItem>({ id: "", subsetId: "", name: "", description: "", price: 0, discount: 0, bulk_discount: false, bulk_price: 0});
 
     const findSubsetIndex = (subsetId: string) => initialState.subsets.findIndex(el => el.id === subsetId);
 

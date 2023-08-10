@@ -74,10 +74,21 @@ const Table = ({subset, onSelectEdit, data}: Props) => {
 
                             <td className={styles.name}>
                                 <div>
-                                    <span>{index+1}. </span>
-                                    <HiMenuAlt4 onClick={onPosition(index)} className={`${styles.icon} ${index === position ? styles.selected : ""}`}/>
-                                    <span>{el.name}</span>
-                                    {el.discount > 0 && <span>{el.discount}% OFF</span>}
+                                    <div>
+                                        <span>{index+1}. </span>
+                                    </div>
+                                    <div>
+                                        <HiMenuAlt4 onClick={onPosition(index)} className={`${styles.icon} ${index === position ? styles.selected : ""}`}/>
+                                    </div>
+                                    <div className={styles.info}>
+                                        <span>{el.name}</span>
+                                        <span>{el.description}</span>
+                                    </div>
+                                    {el.discount > 0 && 
+                                        <div>
+                                            <span className={styles.discount}>{el.discount}% OFF</span>    
+                                        </div>
+                                    }
                                 </div>
                             </td>
 

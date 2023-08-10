@@ -10,6 +10,7 @@ export interface IPricesSubsets {
         id: string,
         name: string,
         price: number,
+        description: string,
         discount: number,
         bulk_price: number,
         bulk_discount: boolean,

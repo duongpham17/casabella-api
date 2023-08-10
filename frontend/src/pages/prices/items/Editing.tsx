@@ -15,6 +15,7 @@ import Button from '@components/buttons/Button';
 import Choice from '@components/inputs/Choice';
 import Checkbox from '@components/inputs/Checkbox';
 import Flex from '@components/flex/Flex';
+import Textarea from '@components/inputs/Textarea';
 
 const Wrapper = ({onSubmit, onDelete, loading, children, message, setEditArea}: {onSubmit: any, onDelete: any, loading: boolean, children: ReactNode, message: string, setEditArea: CallableFunction}) => (
     <div className={styles.wrapper} onClick={() => setEditArea("")}>
@@ -121,7 +122,16 @@ const EditItem = () => {
         setInitialState(data);
         const isLastItem = items.length - 1 === items.findIndex(el => el.id === editItem.id);
         if(!isLastItem) return;
-        const new_item = {id: generateid(), subsetId: editItem.subsetId, name: "", price: 0, discount: 0, bulk_discount: false, bulk_price: 0}
+        const new_item = {
+            id: generateid(), 
+            subsetId: editItem.subsetId, 
+            name: "", 
+            price: 0, 
+            discount: 0, 
+            bulk_discount: false, 
+            bulk_price: 0,
+            description: ""
+        }
         const subsetsItems = data.subsets[subsetIndex].items;
         subsetsItems[subsetsItems.length] = new_item;
         setEditArea("items");
@@ -141,6 +151,9 @@ const EditItem = () => {
         <Wrapper onSubmit={onUpdateItem} onDelete={onDeleteItem} loading={loading} message="remove price" setEditArea={setEditArea}>
             <Input label1="Name" 
                 name="name" value={editItem.name} onChange={onChangeEditItem} 
+            />
+            <Textarea label1="Description" 
+                name="description" value={editItem.description} onChange={onChangeEditItem as any} 
             />
             <Flex>
                 <Input type="number" label1="£ Price" 

@@ -38,7 +38,17 @@
             div{
                 display: flex;
                 align-items: center;
+                margin-right: 0.5rem;
             }          
+            .info{
+                display: block;
+                span{
+                   display: block;
+                }    
+                span:nth-child(2){
+                    color: var(--clr-text-light);
+                }
+            }
             .icon{
                 font-size: 1rem;
                 margin-right: 0.5rem;
@@ -54,10 +64,7 @@
                 background-color: black;
                 color: white;
             }
-            span{
-                margin-right: 0.5rem;
-            }
-            span:nth-child(4){
+            .discount{
                 font-size: 0.7rem;
                 background-color: var(--clr-red);
                 color: white;
