@@ -5,7 +5,8 @@ import useFetch from '@redux/hooks/useFetch';
 
 import Items from './items';
 import Actions from './actions';
-import Edit from './edit';
+import Find from './find';
+import Sort from './sort';
 
 const Prices = () => {
 
@@ -16,11 +17,13 @@ const Prices = () => {
     return (
         <div className={styles.container}>
 
+            <Find />
+
             <Actions editPrice={editPrice} setEditPrice={setEditPrice} />
 
             { editPrice 
                 ?
-                    <Edit />
+                    <Sort />
                 :
                     <Items />
             }

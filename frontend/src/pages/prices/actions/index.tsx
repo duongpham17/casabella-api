@@ -23,7 +23,7 @@ const Actions = ({editPrice, setEditPrice}: Props) => {
             
            {!editPrice && <button onClick={onCreate}>new category</button>}
 
-            <button onClick={() => setEditPrice(!editPrice)} className={editPrice ? styles.selected : ""}>{editPrice ? "done" : "sort"}</button>
+            <button onClick={() => setEditPrice(!editPrice)} className={editPrice ? styles.selected : ""}>{editPrice ? "done" : "sort category"}</button>
 
         </div>
     )

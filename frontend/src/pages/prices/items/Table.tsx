@@ -83,12 +83,8 @@ const Table = ({subset, onSelectEdit, data}: Props) => {
                                     <div className={styles.info}>
                                         <span>{el.name}</span>
                                         <span>{el.description}</span>
+                                        { el.discount > 0 && <span className={styles.discount}>{el.discount}% OFF</span> }
                                     </div>
-                                    {el.discount > 0 && 
-                                        <div>
-                                            <span className={styles.discount}>{el.discount}% OFF</span>    
-                                        </div>
-                                    }
                                 </div>
                             </td>
 

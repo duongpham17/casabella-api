@@ -1,0 +1,18 @@
+.container{
+    margin: 1rem 0;
+    background-color: var(--clr-light-transparent);
+    a{
+        display: block;
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+    }
+    a:hover{
+        background-color: var(--clr-grey-light);
+    }
+    span, small{
+        display: block;
+    }
+    small{
+        font-weight: 200;
+    }
+}

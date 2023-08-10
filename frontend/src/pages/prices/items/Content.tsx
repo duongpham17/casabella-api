@@ -102,7 +102,7 @@ const SubsetItems = () => {
                 <div className={styles.element} key={s.id} onClick={() => onSelectEdit("subsets", s)}>
                     <Text name={`${index+1}. Subset`} value={s.title} />
                     <Table subset={s} data={initialState} onSelectEdit={onSelectEdit}/>
-                    <button onClick={onAddItem(s)}>insert new price</button>
+                    <button onClick={onAddItem(s)}>new price</button>
                 </div>
             )}
         </div>
