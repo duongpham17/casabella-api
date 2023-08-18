@@ -1,7 +1,7 @@
 import styles from './Create.module.scss';
 import empty from '@validations/empty';
 import useForm from '@hooks/useForm';
-import Admin from '@redux/actions/admin';
+import Reviews from '@redux/actions/reviews';
 import { useAppDispatch } from '@redux/hooks/useRedux';
 import { FaStar } from 'react-icons/fa';
 import Button from '@components/buttons/Button';
@@ -19,7 +19,7 @@ const Create = () => {
     const {values, onChange, onSubmit, onSetValue, onClear, loading} = useForm(initialState, callback, empty);
 
     async function callback(){
-        await dispatch(Admin.reviews_create(values));
+        await dispatch(Reviews.create(values));
         onClear()
     };
 

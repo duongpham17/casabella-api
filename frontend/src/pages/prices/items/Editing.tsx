@@ -3,7 +3,7 @@ import { useContext, ReactNode } from 'react';
 import { Context } from './useContext';
 
 import { useAppDispatch } from '@redux/hooks/useRedux';
-import Admin from '@redux/actions/admin';
+import Prices from '@redux/actions/prices';
 
 import { generateid } from '@utils/functions';
 
@@ -46,12 +46,12 @@ const EditTitle = () => {
     const onUpdateTitle = (e:  React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const data = {...initialState, title: editTitle};
-        loadingWrapper(dispatch(Admin.prices_update(data)));
+        loadingWrapper(dispatch(Prices.update(data)));
         setInitialState(data);
     };
 
     const onDeleteCategory = () => {
-        loadingWrapper(dispatch(Admin.prices_delete(initialState)))
+        loadingWrapper(dispatch(Prices.remove(initialState)))
         setEditArea("");
     };
 
@@ -76,13 +76,13 @@ const EditSubsets = () => {
         e.preventDefault();
         const data = {...initialState};
         data.subsets = data.subsets.map((el) => editSubsets.id === el.id ? editSubsets : el);
-        loadingWrapper(dispatch(Admin.prices_update(data)));
+        loadingWrapper(dispatch(Prices.update(data)));
         setInitialState(data);
     };
 
     const onDeleteSubset = () => {
         const data = {...initialState, subsets: initialState.subsets.filter((el) => editSubsets.id !== el.id)};
-        loadingWrapper(dispatch(Admin.prices_update(data)))
+        loadingWrapper(dispatch(Prices.update(data)))
         setInitialState(data);
         setEditArea("");
     };
@@ -118,7 +118,7 @@ const EditItem = () => {
         const subsetIndex = findSubsetIndex(editItem.subsetId);
         const items = data.subsets[subsetIndex].items;
         items[items.findIndex(el => el.id === editItem.id)] = editItem;
-        loadingWrapper(dispatch(Admin.prices_update(data)));
+        loadingWrapper(dispatch(Prices.update(data)));
         setInitialState(data);
         const isLastItem = items.length - 1 === items.findIndex(el => el.id === editItem.id);
         if(!isLastItem) return;
@@ -142,7 +142,7 @@ const EditItem = () => {
         const data = {...initialState};
         const subsetIndex = findSubsetIndex(editItem.subsetId);
         data.subsets[subsetIndex].items = data.subsets[subsetIndex].items.filter(el => el.id !== editItem.id);
-        loadingWrapper(dispatch(Admin.prices_update(data)));
+        loadingWrapper(dispatch(Prices.update(data)));
         setInitialState(data);
         setEditArea("");
     };

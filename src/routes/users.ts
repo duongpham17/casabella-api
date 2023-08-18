@@ -1,10 +1,13 @@
 import express, {IRouter} from 'express';
 
-import { protect } from '../controller/authentication';
+import { protect, restrictTo } from '../controller/authentication';
+import { find, update } from '../controller/users';
 
 const router: IRouter = express.Router();
 
-router.use(protect);
+router.get('/', find);
 
+router.use(protect, restrictTo("admin"));
+router.patch('/', update);
 
 export default router;

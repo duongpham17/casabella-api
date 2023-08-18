@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './Table.module.scss';
 import { useAppDispatch } from '@redux/hooks/useRedux';
 import { HiMenuAlt4 } from 'react-icons/hi';
-import Admin from '@redux/actions/admin';
+import Prices from '@redux/actions/prices';
 
 interface Props {
     data: IPrice,
@@ -44,7 +44,7 @@ const Table = ({subset, onSelectEdit, data}: Props) => {
         new_price_list.subsets[subset_index] = new_subset;
 
         // //update databse
-        dispatch(Admin.prices_update(new_price_list));
+        dispatch(Prices.update(new_price_list));
 
         //reset 
         setCloneSubset(new_subset);

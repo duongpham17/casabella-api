@@ -1,6 +1,6 @@
 import styles from './Actions.module.scss';
 import { useAppDispatch, useAppSelector } from '@redux/hooks/useRedux';
-import Admin from '@redux/actions/admin';
+import Prices from '@redux/actions/prices';
 
 interface Props {
     editPrice: boolean,
@@ -11,11 +11,11 @@ const Actions = ({editPrice, setEditPrice}: Props) => {
 
     const dispatch = useAppDispatch();
 
-    const {prices} = useAppSelector(state => state.admin);
+    const {prices} = useAppSelector(state => state.prices);
 
     const onCreate = () => {
         if(!prices) return;
-        dispatch(Admin.prices_create({title: `${prices.length+1} Main Title`}));
+        dispatch(Prices.create({title: `${prices.length+1} Main Title`}));
     };
     
     return (
@@ -23,7 +23,7 @@ const Actions = ({editPrice, setEditPrice}: Props) => {
             
            {!editPrice && <button onClick={onCreate}>new category</button>}
 
-            <button onClick={() => setEditPrice(!editPrice)} className={editPrice ? styles.selected : ""}>{editPrice ? "done" : "sort category"}</button>
+            <button onClick={() => setEditPrice(!editPrice)}>{editPrice ? "done" : "sort category"}</button>
 
         </div>
     )

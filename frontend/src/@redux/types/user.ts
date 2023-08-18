@@ -15,6 +15,7 @@ export interface ResponseType {
 
 export interface INITIALSTATE_USER {
     user: IUser | null,
+    users: IUser[] | null,
     status: ResponseType,
     errors: ResponseType,
 };
@@ -24,22 +25,28 @@ export type UserObjectKeys = keyof INITIALSTATE_USER
 /*ACTION**************************************************************************************************************/
 
 export enum TYPES_USER {
-    USER = "USER",
-    USER_USERS = "USER_USERS",
+    USER_LOGIN = "USER_LOGIN",
+    USER_FIND = "USER_FIND",
+    USER_UPDATE = "USER_UPDATE",
     USER_RESPONSE_STATUS = "RESPONSE_STATUS",
     USER_RESPONSE_ERROR  = "RESPONSE_ERROR",
     USER_RESPONSE_CLEAR  = "RESPONSE_CLEAR",
     USER_STATE_CLEAR     = "USER_STATE_CLEAR",
 };
-
-interface User {
-    type: TYPES_USER.USER,
+ 
+interface Login {
+    type: TYPES_USER.USER_LOGIN,
     payload: IUser
+}
+
+interface Find {
+    type: TYPES_USER.USER_FIND,
+    payload: IUser[]
 };
 
-interface Users {
-    type: TYPES_USER.USER_USERS,
-    payload: IUser[]
+interface Update {
+    type: TYPES_USER.USER_UPDATE,
+    payload: IUser
 };
 
 interface Response_Status {
@@ -65,4 +72,6 @@ interface State_Clear {
     }
 };
 
-export type ACTION_USER = User | Users | Response_Error | Response_Status | Response_Clear | State_Clear
+export type ACTIONS_USER = 
+    Login | Find | Update | 
+    Response_Error | Response_Status | Response_Clear | State_Clear

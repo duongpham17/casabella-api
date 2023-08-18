@@ -1,7 +1,7 @@
 import styles from './Actions.module.scss';
 import React from 'react';
 import { useAppDispatch } from '@redux/hooks/useRedux';
-import Admin from '@redux/actions/admin';
+import Services from '@redux/actions/services';
 
 interface Props {
     editServices: boolean,
@@ -12,7 +12,7 @@ const Actions = ({editServices, setEditServices}: Props) => {
 
     const dispatch = useAppDispatch();
 
-    const onCreate = () => dispatch(Admin.services_create());
+    const onCreate = () => dispatch(Services.create({type: "services"}));
 
     return (
         <div className={styles.container}>

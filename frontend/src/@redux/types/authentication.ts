@@ -52,4 +52,4 @@ interface State_Clear {
     }
 };
 
-export type ACTION_AUTHENTICATION = LoadUser | Response_Status | Response_Clear | Response_Error | State_Clear
+export type ACTIONS_AUTHENTICATION = LoadUser | Response_Status | Response_Clear | Response_Error | State_Clear

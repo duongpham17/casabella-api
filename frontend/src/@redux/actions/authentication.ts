@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
-import { ACTION_AUTHENTICATION, AuthenticationObjectKeys, TYPES_AUTHENTICATION } from '@redux/types/authentication';
-import { ACTION_USER, TYPES_USER } from '@redux/types/user';
+import { ACTIONS_AUTHENTICATION, AuthenticationObjectKeys, TYPES_AUTHENTICATION } from '@redux/types/authentication';
+import { ACTIONS_USER, TYPES_USER } from '@redux/types/user';
 import { api } from '@redux/api';
 import { redirect } from '@utils/functions';
 import { localSet } from '@utils/localstorage';
@@ -11,7 +11,7 @@ const logout = () => {
     redirect();
 };
 
-const load_user = () => async (dispatch: Dispatch<ACTION_AUTHENTICATION | ACTION_USER>) => {
+const load_user = () => async (dispatch: Dispatch<ACTIONS_AUTHENTICATION | ACTIONS_USER>) => {
     try{
         const res = await api.get('/authentication/persist');
         dispatch({
@@ -19,7 +19,7 @@ const load_user = () => async (dispatch: Dispatch<ACTION_AUTHENTICATION | ACTION
             payload: true
         });
         dispatch({
-            type: TYPES_USER.USER,
+            type: TYPES_USER.USER_LOGIN,
             payload: res.data.data
         });
     } catch(err){
@@ -27,7 +27,7 @@ const load_user = () => async (dispatch: Dispatch<ACTION_AUTHENTICATION | ACTION
     }
 };
     
-const login = (email: string) => async (dispatch: Dispatch<ACTION_AUTHENTICATION>) => {
+const login = (email: string) => async (dispatch: Dispatch<ACTIONS_AUTHENTICATION>) => {
     try{
         const res = await api.post(`/authentication/email`, {email});
         dispatch({
@@ -47,7 +47,7 @@ const login = (email: string) => async (dispatch: Dispatch<ACTION_AUTHENTICATION
     }
 };
 
-const confirm_with_email = (token: string) => async (dispatch: Dispatch<ACTION_AUTHENTICATION>) => {
+const confirm_with_email = (token: string) => async (dispatch: Dispatch<ACTIONS_AUTHENTICATION>) => {
     try{
         const res = await api.get(`/authentication/authenticate/${token}`);
         localSet("user", res.data.cookie);
@@ -62,7 +62,7 @@ const confirm_with_email = (token: string) => async (dispatch: Dispatch<ACTION_A
     }
 };
 
-const confirm_with_code = (email: string, code: string) => async (dispatch: Dispatch<ACTION_AUTHENTICATION>) => {
+const confirm_with_code = (email: string, code: string) => async (dispatch: Dispatch<ACTIONS_AUTHENTICATION>) => {
     try{
         const res = await api.post(`/authentication/authenticate`, {email, code});
         localSet("user", res.data.cookie);
@@ -77,7 +77,7 @@ const confirm_with_code = (email: string, code: string) => async (dispatch: Disp
     }
 };
 
-const state_clear = (key:AuthenticationObjectKeys, value: any) => async (dispatch: Dispatch<ACTION_AUTHENTICATION>) => {
+const state_clear = (key:AuthenticationObjectKeys, value: any) => async (dispatch: Dispatch<ACTIONS_AUTHENTICATION>) => {
     dispatch({
         type: TYPES_AUTHENTICATION.AUTHENTICATION_STATE_CLEAR,
         payload: { key, value }

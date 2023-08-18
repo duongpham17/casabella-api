@@ -4,7 +4,7 @@ import { Context } from './useContext';
 import { generateid } from '@utils/functions';
 import { IPriceSubsets } from '@redux/types/prices';
 import { useAppDispatch } from '@redux/hooks/useRedux';
-import Admin from '@redux/actions/admin';
+import Prices from '@redux/actions/prices';
 
 import Table from './Table';
 
@@ -44,7 +44,7 @@ const Edit = () => {
         const new_subset_index = findSubsetIndex(subset.id);
         data_new_position.subsets[new_subset_index] = editOptions.data;
         data_new_position.subsets[old_subset_index] = subset;
-        loadingWrapper(dispatch(Admin.prices_update(data_new_position)));
+        loadingWrapper(dispatch(Prices.update(data_new_position)));
         setEditOptions({set: true, data: null});
     };
 

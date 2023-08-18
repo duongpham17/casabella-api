@@ -1,6 +1,7 @@
 import {Schema, model, Document} from 'mongoose';
 
 export interface IServices extends Document {
+    type: string,
     text_1: string,
     text_2: string,
     text_3: string,
@@ -11,6 +12,9 @@ export interface IServices extends Document {
 };
 
 const servicesSchema = new Schema<IServices>({
+    type: {
+        type: String,
+    },
     text_1: {
         type: String,
     },

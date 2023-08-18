@@ -20,7 +20,7 @@ const Item = ({data, index}: {data: IPrice, index: number}) => {
 
 const ItemsWrapper = () => {
 
-  const {prices} = useAppSelector(state => state.admin);
+  const {prices} = useAppSelector(state => state.prices);
 
   return ( !prices ? null : 
     <div> 

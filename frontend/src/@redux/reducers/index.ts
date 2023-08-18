@@ -3,13 +3,17 @@ import { combineReducers } from '@reduxjs/toolkit';
 import alert from './alert';
 import authentication from './authentication';
 import user from './user';
-import admin from './admin';
+import services from './services';
+import prices from './prices';
+import reviews from './reviews';
 
 const reducers = combineReducers({
     alert,
     authentication,
     user,
-    admin
+    prices,
+    services,
+    reviews
 });
 
 export default reducers;

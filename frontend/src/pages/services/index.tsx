@@ -1,20 +1,20 @@
 import styles from './Services.module.scss';
 import { useState } from 'react';
 import { useAppSelector } from '@redux/hooks/useRedux';
-import Admin from '@redux/actions/admin';
+import Services from '@redux/actions/services';
 import useFetch from '@redux/hooks/useFetch';
 
 import Item from './item';
 import Actions from './actions';
 import Edit from './edit';
 
-const Services = () => {
+const ServicesContainer = () => {
 
   const [editServices, setEditServices] = useState(false)
 
-  useFetch(Admin.services());
+  useFetch(Services.find("type=services"));
 
-  const {services} = useAppSelector(state => state.admin);
+  const {services} = useAppSelector(state => state.services);
 
   return (
     <div className={styles.container}>
@@ -31,4 +31,4 @@ const Services = () => {
   )
 }
 
-export default Services
+export default ServicesContainer

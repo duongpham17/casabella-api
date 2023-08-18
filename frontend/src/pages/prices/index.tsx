@@ -1,6 +1,6 @@
 import styles from './Prices.module.scss';
 import { useState } from 'react'
-import Admin from '@redux/actions/admin';
+import Prices from '@redux/actions/prices';
 import useFetch from '@redux/hooks/useFetch';
 
 import Items from './items';
@@ -8,9 +8,9 @@ import Actions from './actions';
 import Find from './find';
 import Sort from './sort';
 
-const Prices = () => {
+const PricesContainer = () => {
 
-    useFetch(Admin.prices());
+    useFetch(Prices.find());
 
     const [editPrice, setEditPrice] = useState(false)
 
@@ -32,4 +32,4 @@ const Prices = () => {
     )
 }
 
-export default Prices
+export default PricesContainer

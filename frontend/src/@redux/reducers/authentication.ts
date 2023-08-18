@@ -1,4 +1,4 @@
-import { ACTION_AUTHENTICATION, TYPES_AUTHENTICATION, INITIALSTATE_AUTHENTICATION} from '@redux/types/authentication';
+import { ACTIONS_AUTHENTICATION, TYPES_AUTHENTICATION, INITIALSTATE_AUTHENTICATION} from '@redux/types/authentication';
 
 const initialState: INITIALSTATE_AUTHENTICATION = {
     isLoggedIn: false,
@@ -6,7 +6,7 @@ const initialState: INITIALSTATE_AUTHENTICATION = {
     errors: {}
 };
 
-export const authentication = (state = initialState, action: ACTION_AUTHENTICATION) => {
+export const authentication = (state = initialState, action: ACTIONS_AUTHENTICATION) => {
     const {type, payload} = action;
 
     switch(type){

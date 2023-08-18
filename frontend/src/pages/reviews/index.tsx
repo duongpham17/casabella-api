@@ -1,16 +1,16 @@
 import styles from './Reviews.module.scss';
-import Admin from '@redux/actions/admin';
+import Reviews from '@redux/actions/reviews';
 import useFetch from '@redux/hooks/useFetch';
 import { useAppSelector } from '@redux/hooks/useRedux';
 
 import Item from './item';
 import Create from './create';
 
-const Reviews = () => {
+const ReviewsContainer = () => {
 
-    useFetch(Admin.reviews());
+    useFetch(Reviews.find());
 
-    const { reviews } = useAppSelector(state => state.admin);
+    const { reviews } = useAppSelector(state => state.reviews);
 
     return (
       <div className={styles.container}>
@@ -25,4 +25,4 @@ const Reviews = () => {
     )
 }
 
-export default Reviews
+export default ReviewsContainer

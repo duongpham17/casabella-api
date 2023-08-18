@@ -6,8 +6,11 @@
     border-bottom: 1px solid black;
 
     a, button{
+        display: flex;
         &:hover{
-            color: var(--clr-main);
+            *{
+                color: var(--clr-main);
+            }
         }
     }
 }

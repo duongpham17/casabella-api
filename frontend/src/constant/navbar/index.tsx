@@ -3,6 +3,7 @@ import React from 'react'
 import { useAppDispatch, useAppSelector } from '@redux/hooks/useRedux';
 import { Link } from 'react-router-dom';
 import authentication from '@redux/actions/authentication';
+import { AiOutlineLogout } from 'react-icons/ai';
 
 const Navbar = () => {
 
@@ -16,15 +17,13 @@ const dispatch = useAppDispatch();
   
   return (
     <div className={styles.container}>
-        <Link to="/"><p>Casa Bella</p></Link>
-
-        <Link to="/"><p>{user?.role}</p></Link>
+        <Link to="/"><p>CASA BELLA | {user?.role.toUpperCase()}</p></Link>
 
         { !isLoggedIn 
         ? 
             <Link to="/login">Login</Link> 
         : 
-            <button onClick={onLogout}>logout</button>
+            <button onClick={onLogout}><AiOutlineLogout size={20}/></button>
         }
     </div>
   )

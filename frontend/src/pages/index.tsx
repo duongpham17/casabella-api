@@ -9,6 +9,7 @@ import Login from 'pages/login';
 import Users from './users';
 import Prices from './prices';
 import Services from './services';
+import Subservices from './subservices';
 import Reviews from './reviews';
 import Unknown from 'pages/unknown';
 
@@ -23,7 +24,9 @@ const Pages = () => {
         <Route path="/users" element={<Private component={Users} roles={["admin"]}/> } />
         <Route path="/prices" element={<Private component={Prices} roles={["admin"]}/> } />
         <Route path="/services" element={<Private component={Services} roles={["admin"]}/> } />
+        <Route path="/subservices" element={<Private component={Subservices} roles={["admin"]}/> } />
         <Route path="/reviews" element={<Private component={Reviews} roles={["admin"]}/> } />
+        
 
         <Route path="*" element={<Unknown/>} />
       </Routes>

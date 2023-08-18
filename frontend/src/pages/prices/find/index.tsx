@@ -3,7 +3,7 @@ import { useAppSelector } from '@redux/hooks/useRedux';
 
 const FindContainer = () => {
     
-    const {prices} = useAppSelector(state => state.admin);
+    const {prices} = useAppSelector(state => state.prices);
 
     return (
         <div className={styles.container}>

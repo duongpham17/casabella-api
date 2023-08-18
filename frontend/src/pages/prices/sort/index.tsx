@@ -2,7 +2,7 @@ import styles from './Sort.module.scss';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@redux/hooks/useRedux';
 import { IPrice } from '@redux/types/prices';
-import Admin from '@redux/actions/admin'
+import Prices from '@redux/actions/prices'
 import { BsTrash } from 'react-icons/bs';
 import useLoading from '@hooks/useLoading';
 import Spinner from '@components/loading/Spinner';
@@ -11,7 +11,7 @@ const SortContainer = () => {
 
     const dispatch = useAppDispatch();
 
-    const {prices} = useAppSelector( state => state.admin);
+    const {prices} = useAppSelector( state => state.prices);
 
     const [edit, setEdit] = useState<IPrice | null>(null);
 
@@ -30,8 +30,8 @@ const SortContainer = () => {
         new_data[new_index] = {...edit, createdAt: selected.createdAt}
         new_data[old_index] = {...selected, createdAt: edit.createdAt}
 
-        dispatch(Admin.prices_update(new_data[new_index]));
-        dispatch(Admin.prices_update(new_data[old_index]));
+        dispatch(Prices.update(new_data[new_index]));
+        dispatch(Prices.update(new_data[old_index]));
 
         setData(new_data);
         setEdit(null);
@@ -43,7 +43,7 @@ const SortContainer = () => {
         if(!data) return;
         const new_data = data.filter(el => el._id !== p._id);
         setData(new_data);
-        await onLoading(() => dispatch(Admin.prices_delete(p)));
+        await onLoading(() => dispatch(Prices.remove(p)));
     };
 
     return ( !data ? null :

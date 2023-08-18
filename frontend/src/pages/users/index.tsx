@@ -2,7 +2,7 @@ import styles from './Users.module.scss';
 import { useAppDispatch, useAppSelector } from '@redux/hooks/useRedux';
 import useFetch from '@redux/hooks/useFetch';
 import { IUser } from '@redux/types/user';
-import Admin from '@redux/actions/admin';
+import User from '@redux/actions/user';
 import Alert from '@redux/actions/alert';
 
 import useForm from '@hooks/useForm';
@@ -14,13 +14,13 @@ import Flex from '@components/flex/Flex';
 import Button from '@components/buttons/Button';
 import Loading from '@components/loading/Fish';
 
-const Users = () => {
+const UsersContainer = () => {
 
     const dispatch = useAppDispatch();
 
-    const {users} = useAppSelector(state => state.admin);
+    const {users} = useAppSelector(state => state.user);
 
-    useFetch(dispatch(Admin.users), users);
+    useFetch(dispatch(User.find), users);
     
     const initialState: IUser = {
         _id: "",
@@ -32,7 +32,7 @@ const Users = () => {
     const {onSetValue, values, onSubmit, loading} = useForm(initialState, callback, validation);    
 
     async function callback(){
-        await dispatch(Admin.users_update(values))
+        await dispatch(User.update(values))
         dispatch(Alert.set("user updated", "green"));
     };
 
@@ -74,4 +74,4 @@ const Users = () => {
 }
 
 
-export default Users
+export default UsersContainer

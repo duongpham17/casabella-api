@@ -1,7 +1,7 @@
 import styles from './Item.module.scss';
 import empty from '@validations/empty';
 import useForm from '@hooks/useForm';
-import Admin from '@redux/actions/admin';
+import Reviews from '@redux/actions/reviews';
 import { useAppDispatch } from '@redux/hooks/useRedux';
 import { FaStar } from 'react-icons/fa';
 import { MdKeyboardArrowRight } from 'react-icons/md';
@@ -24,11 +24,11 @@ const Item = ({review, index}:Props) => {
     const {values, onChange, onSubmit, onSetValue, loading, edited} = useForm(review, callback, empty);
 
     async function callback(){
-        await dispatch(Admin.reviews_update(values));
+        await dispatch(Reviews.update(values));
     };
 
     const onDelete = () => {
-        onLoadingDelete(() => dispatch(Admin.reviews_delete(review)))
+        onLoadingDelete(() => dispatch(Reviews.remove(review)))
     };
 
     return (

@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 ;
 const servicesSchema = new mongoose_1.Schema({
+    type: {
+        type: String,
+    },
     text_1: {
         type: String,
     },

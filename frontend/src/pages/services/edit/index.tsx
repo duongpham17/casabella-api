@@ -4,7 +4,7 @@ import { remove } from '@thirdparty/nftstorage';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@redux/hooks/useRedux';
 import { IService } from '@redux/types/services';
-import Admin from '@redux/actions/admin'
+import Services from '@redux/actions/services'
 import { BsTrash } from 'react-icons/bs';
 import useLoading from '@hooks/useLoading';
 import Spinner from '@components/loading/Spinner';
@@ -12,7 +12,7 @@ import Spinner from '@components/loading/Spinner';
 const Edit = () => {
     const dispatch = useAppDispatch();
 
-    const {services} = useAppSelector( state => state.admin );
+    const {services} = useAppSelector( state => state.services );
 
     const [edit, setEdit] = useState<IService | null>(null);
 
@@ -33,8 +33,8 @@ const Edit = () => {
         new_data[new_index] = {...edit, createdAt: selected.createdAt}
         new_data[old_index] = {...selected, createdAt: edit.createdAt}
 
-        dispatch(Admin.services_update(new_data[new_index]));
-        dispatch(Admin.services_update(new_data[old_index]));
+        dispatch(Services.update(new_data[new_index]));
+        dispatch(Services.update(new_data[old_index]));
 
         setData(new_data);
 
@@ -47,7 +47,7 @@ const Edit = () => {
         if(!data) return;
         const new_data = data.filter(el => el._id !== s._id);
         setData(new_data);
-        await onLoading(() => dispatch(Admin.services_delete(s)));
+        await onLoading(() => dispatch(Services.remove(s)));
         const cid = s.image.split("/")[2].split(".")[0];
         await remove(cid);
     };

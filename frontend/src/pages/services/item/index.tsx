@@ -3,7 +3,7 @@ import { useAppDispatch } from '@redux/hooks/useRedux';
 import { IService } from '@redux/types/services';
 import { upload, remove } from '@thirdparty/nftstorage';
 
-import Admin from '@redux/actions/admin';
+import Services from '@redux/actions/services';
 import Alert from '@redux/actions/alert';
 import useForm from '@hooks/useForm';
 import empty from '@validations/empty';
@@ -22,7 +22,7 @@ const Item = ({service}: Props) => {
     const {onSubmit, values, onChange, edited, onSetValue} = useForm(service, callback, empty);
 
     function callback(){
-        dispatch(Admin.services_update(values));
+        dispatch(Services.update(values));
         dispatch(Alert.set("updated", "green"));
     };
 
@@ -30,13 +30,13 @@ const Item = ({service}: Props) => {
         const {ipfs} = await upload(file);
         const url = `https://${ipfs}.ipfs.nftstorage.link`;
         await onSetValue({image: url});
-        await dispatch(Admin.services_update({...values, image: url}));
+        await dispatch(Services.update({...values, image: url}));
     };
 
     const onRemoveImage = async () => {
         onSetValue({image: ""});
         const cid = values.image.split("/")[2].split(".")[0];
-        await dispatch(Admin.services_update({...values, image: ""}));
+        await dispatch(Services.update({...values, image: ""}));
         await remove(cid);
     };
 

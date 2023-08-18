@@ -1,7 +1,15 @@
 import express, {IRouter} from 'express';
-import { reviews } from '../controller/reviews';
+
+import { protect, restrictTo } from '../controller/authentication';
+import { find, create, update, remove } from '../controller/reviews';
+
 const router: IRouter = express.Router();
 
-router.get('/', reviews);
+router.get('/', find);
+
+router.use(protect, restrictTo("admin"));
+router.post('/', create)
+router.patch('/', update);
+router.delete('/:id', remove);
 
 export default router;
