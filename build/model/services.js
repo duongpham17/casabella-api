@@ -24,6 +24,9 @@ const servicesSchema = new mongoose_1.Schema({
     image: {
         type: String
     },
+    more: {
+        type: String
+    },
     createdAt: {
         type: Date,
         default: new Date

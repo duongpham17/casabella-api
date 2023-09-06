@@ -2,71 +2,113 @@
     border: 2px solid black;
     margin-bottom: 1rem;
     padding: 1rem;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr 0.8fr;
-    grid-template-areas: 
-    "left right"     
-    ;
 
-    .left{
-        grid-area: left;
+    .nopreviewContainer, .previewContainer{
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr 0.8fr;
+        grid-template-areas:
+        "preview preview" 
+        "left right"
+        "more more"
+        ;
 
-        form{
-            input, textarea{
+        .left{
+            grid-area: left;
+        }
+        .right{
+            grid-area: right;
+            img{
+                width: 95%;
+                height: 100%;
+                margin: auto;
+                float: right;
+                position: relative;
+            }
+        }
+        .more{
+            grid-area: more;
+        }
+    }
+
+    .nopreviewContainer{
+        .left{
+            form{
+                input, textarea{
+                    display: block;
+                    margin-bottom: 1rem;
+                    font-weight: 200;
+                    width: 100%;
+                    resize: vertical;
+                    border: 1px solid transparent;
+                    padding: 0.5rem;
+                    background-color: var(--clr-dark-transparent);
+                    &:hover{
+                        border: 1px solid var(--clr-main);
+                    }
+                }
+                .input1{
+                    color: grey;
+                }
+                .input2{
+                    font-size: 2rem;
+                }
+                .input3{
+                    font-size: 1.2rem;
+                    min-height: 50px;
+                }
+                .input4{
+                    font-size: 0.9rem;
+                    color: grey;
+                    min-height: 100px;
+                }
+                .input5{
+                    font-size: 1.2rem;
+                    min-height: 50px;
+                }
+                .more{
+                    min-height: 200px;
+                }
+            }
+        }
+    }
+
+    .previewContainer{
+
+        .left{
+            .input1, .input2, .input3, .input4, .input5{
                 display: block;
                 margin-bottom: 1rem;
                 font-weight: 200;
-                width: 100%;
-                resize: vertical;
-                border: 1px solid transparent;
-                padding: 0.5rem;
-                background-color: var(--clr-dark-transparent);
-                &:hover{
-                    border: 1px solid var(--clr-main);
+            }
+
+            .actions{
+                display: flex;
+
+                a, button{
+                    width: 150px;
+                    background-color: var(--clr-light);
+                    padding: 1rem;
+                    display: block;
+                    text-align: center;
+                    margin-right: 0.5rem;
                 }
             }
-            textarea{
-            }
-            .input1{
-                color: grey;
-            }
-            .input2{
-                font-size: 2rem;
-            }
-            .input3{
-                font-size: 1.2rem;
-                min-height: 50px;
-            }
-            .input4{
-                font-size: 0.9rem;
-                color: grey;
-                min-height: 100px;
-            }
-            .input5{
-                font-size: 1.2rem;
-                min-height: 50px;
+        }
+        .more{
+            h1, h2, h3, h4, p, b, small, span{
+                display: block;
+                font-weight: 200;
+                margin-bottom: 1rem;
             }
         }
-        
     }
 
-    .right{
-        grid-area: right;
-        position: relative;
-
-        img{
-            width: 95%;
-            height: 100%;
-            margin: auto;
-            float: right;
-            position: relative;
-        }
-    }
 
     @media (max-width: 700px){
         grid-template-columns: 1fr;
         grid-template-areas: 
+        "preview"
         "right"
         "left"     
         ;

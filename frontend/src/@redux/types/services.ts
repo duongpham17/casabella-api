@@ -8,6 +8,7 @@ export interface IService {
     text_4: string,
     text_5: string,
     image: string,
+    more: string,
     createdAt: Date
 }
 

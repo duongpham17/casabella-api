@@ -1,4 +1,7 @@
 import styles from './Item.module.scss';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Markup } from 'interweave';
 import { useAppDispatch } from '@redux/hooks/useRedux';
 import { IService } from '@redux/types/services';
 import { upload, remove } from '@thirdparty/nftstorage';
@@ -18,6 +21,10 @@ interface Props{
 const Item = ({service}: Props) => {
 
     const dispatch = useAppDispatch();
+
+    const [preview, setPreview] = useState(false);
+
+    const [more, setMore] = useState(false);
 
     const {onSubmit, values, onChange, edited, onSetValue} = useForm(service, callback, empty);
 
@@ -43,25 +50,64 @@ const Item = ({service}: Props) => {
     return (
         <div className={styles.container}>
 
-            <div className={styles.left}>
-                <form onSubmit={onSubmit}>
-                    <input className={styles.input1} name="text_1" value={values.text_1 || ""} onChange={onChange} placeholder="small" />
-
-                    <textarea className={styles.input2} name="text_2" value={values.text_2 || ""} onChange={onChange} placeholder="header" />
-
-                    <textarea className={styles.input3} name="text_3" value={values.text_3 || ""} onChange={onChange} placeholder="summary" />
-
-                    <textarea className={styles.input4} name="text_4" value={values.text_4 || ""} onChange={onChange} placeholder="paragraph" />
-
-                    <textarea className={styles.input5} name="text_5" value={values.text_5 || ""} onChange={onChange} placeholder="summary" />
-                    
-                    {edited && <Button type="submit" label1="Save" color='main' />}
-                </form>
+            <div className={styles.previewBtn}>
+                <Button label1="Preview Layout" color='black' onClick={() => setPreview(!preview)} />
             </div>
 
-            <div className={styles.right}>
-                <File src={values.image} callback={onUploadImage} onDelete={onRemoveImage}/>
-            </div>
+            { !preview ?
+                <div className={styles.nopreviewContainer}>
+                    <div className={styles.left}>
+                        <form onSubmit={onSubmit}>
+                            <input className={styles.input1} name="text_1" value={values.text_1 || ""} onChange={onChange} placeholder="small" />
+
+                            <textarea className={styles.input2} name="text_2" value={values.text_2 || ""} onChange={onChange} placeholder="header" />
+
+                            <textarea className={styles.input3} name="text_3" value={values.text_3 || ""} onChange={onChange} placeholder="summary" />
+
+                            <textarea className={styles.input4} name="text_4" value={values.text_4 || ""} onChange={onChange} placeholder="paragraph" />
+
+                            <textarea className={styles.input5} name="text_5" value={values.text_5 || ""} onChange={onChange} placeholder="summary" />
+
+                            <textarea className={styles.more} name="more" value={values.more || ""} onChange={onChange} placeholder="more information, <h1>header</h1>, <h2>bold</h2>, <p>paragraph</p>" />
+                            
+                            {edited && <Button type="submit" label1="Save" color='main' />}
+                        </form>
+                    </div>
+
+                    <div className={styles.right}>
+                        <File src={values.image} callback={onUploadImage} onDelete={onRemoveImage}/>
+                    </div>
+                </div>
+            : 
+                <div className={styles.previewContainer}>
+                    <div className={styles.left}>
+                        {values.text_1 && <p className={styles.input1}>{values.text_1}</p>}
+                        
+                        {values.text_2 && <h1 className={styles.input2}>{values.text_2}</h1>}
+
+                        {values.text_3 && <p className={styles.input3}>{values.text_3}</p>}
+
+                        {values.text_4 && <p className={styles.input4}> {values.text_4} </p>}
+
+                        {values.text_5 && <p className={styles.input5}> {values.text_5} </p>}
+
+                        <div className={styles.actions}>
+                            <Link to="https://booking.casabellalondon.co.uk" rel="noopener noreferrer" target="_blank">Book now</Link>
+                            <button onClick={() => setMore(!more)}>More</button>
+                        </div>
+                    </div>
+                    <div className={styles.right}>
+                        <div/>
+                        <img src={values.image} alt="treatments"/>
+                    </div>
+                    {more && 
+                        <div className={styles.more}>
+                            <Markup content={values.more} />
+                        </div>
+                    }
+                </div>
+                
+            }
 
         </div>
     )

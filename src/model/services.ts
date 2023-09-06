@@ -8,6 +8,7 @@ export interface IServices extends Document {
     text_4: string,
     text_5: string,
     image: string,
+    more: string,
     createdAt: Date
 };
 
@@ -31,6 +32,9 @@ const servicesSchema = new Schema<IServices>({
         type: String,
     },
     image: {
+        type: String
+    },
+    more:{
         type: String
     },
     createdAt: {
