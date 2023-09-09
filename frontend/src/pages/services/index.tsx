@@ -7,13 +7,10 @@ import useFetch from '@redux/hooks/useFetch';
 import Item from './item';
 import Actions from './actions';
 import Edit from './edit';
-import More from './more';
 
 const ServicesContainer = () => {
 
   const [editServices, setEditServices] = useState(false);
-
-  const [more, setMore] = useState(false);
 
   useFetch(Services.find("type=services"));
 
@@ -21,9 +18,9 @@ const ServicesContainer = () => {
 
   return (
     <div className={styles.container}>
-      <Actions editServices={editServices} setEditServices={setEditServices} more={more} setMore={setMore} />
-
-      {more && <More />}
+      <Actions 
+        editServices={editServices} setEditServices={setEditServices}
+      />
 
       {!editServices 
         ? 

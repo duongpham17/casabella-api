@@ -1,7 +1,8 @@
 .container{
     margin: 1rem 0;
+    display: flex;
 
-    button{
+    .button{
         background-color: var(--clr-dark);
         padding: 1rem;
         min-width: 100px;
