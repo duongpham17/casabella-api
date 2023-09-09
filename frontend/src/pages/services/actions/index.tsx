@@ -6,9 +6,11 @@ import Services from '@redux/actions/services';
 interface Props {
     editServices: boolean,
     setEditServices:  React.Dispatch<React.SetStateAction<boolean>>
+    more: boolean,
+    setMore: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Actions = ({editServices, setEditServices}: Props) => {
+const Actions = ({editServices, setEditServices, more, setMore}: Props) => {
 
     const dispatch = useAppDispatch();
 
@@ -18,6 +20,7 @@ const Actions = ({editServices, setEditServices}: Props) => {
         <div className={styles.container}>
            {!editServices && <button onClick={onCreate}>new service</button>}
             <button onClick={() => setEditServices(!editServices)} className={ editServices ? styles.selected : ""}>{editServices ? "done" : "sort"}</button>
+            <button onClick={() => setMore(!more)}>tags?</button>
         </div>
     )
 }   

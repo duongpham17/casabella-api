@@ -1,7 +1,6 @@
 import styles from './Item.module.scss';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Markup } from 'interweave';
 import { useAppDispatch } from '@redux/hooks/useRedux';
 import { IService } from '@redux/types/services';
 import { upload, remove } from '@thirdparty/nftstorage';
@@ -102,7 +101,30 @@ const Item = ({service}: Props) => {
                     </div>
                     {more && 
                         <div className={styles.more}>
-                            <Markup content={values.more} />
+                           {values.more.split("\n").map((el, index) => 
+                                el.includes("<p>") ? 
+                                    <p key={index}>{el.replaceAll("<p>", " ").replaceAll("</p>", " ")}</p>
+                                : el.includes("<h1>") ?
+                                    <h1 key={index}>{el.replaceAll("<h1>", " ").replaceAll("</h1>", " ")}</h1>
+                                : el.includes("<h2>") ? 
+                                    <h2 key={index}>{el.replaceAll("<h2>", " ").replaceAll("</h2>", " ")}</h2>
+                                : el.includes("<h3>") ?
+                                    <h3 key={index}>{el.replaceAll("<h3>", " ").replaceAll("</h3>", " ")}</h3>
+                                : el.includes("<youtube>") ?
+                                    <iframe key={index} width="100%" height="400" 
+                                        src={el.replaceAll("<youtube>", " ").replaceAll("</youtube>", " ")} 
+                                        title="YouTube video player" frameBorder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                        allowFullScreen>
+                                    </iframe>
+                                : el.includes("<video>") ?
+                                    <video key={index} controls muted>
+                                        <source src={el.replaceAll("<video>", " ").replaceAll("</video>", " ")} type="video/mp4" />
+                                    </video>
+                                :  el.includes("<img>") ?
+                                    <img key={index} src={el.replaceAll("<img>", " ").replaceAll("</img>", " ")} alt="item" />
+                                : ""
+                            )}
                         </div>
                     }
                 </div>

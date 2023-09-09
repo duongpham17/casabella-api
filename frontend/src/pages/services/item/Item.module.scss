@@ -96,7 +96,10 @@
             }
         }
         .more{
-            h1, h2, h3, h4, p, b, small, span{
+            h1,h2{
+                border-bottom: 1px solid black
+            }
+            h1, h2, p{
                 display: block;
                 font-weight: 200;
                 margin-bottom: 1rem;
@@ -107,8 +110,11 @@
             }
             img{
                 display: inline;
-                width: 49%;
-                height: 300px;
+                justify-content: center;
+                text-align: center;
+                width: 48%;
+                height: 400px;
+                border: 2px solid white;
             }
         }
     }
