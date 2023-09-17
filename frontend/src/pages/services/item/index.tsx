@@ -104,6 +104,8 @@ const Item = ({service}: Props) => {
                            {values.more.split("\n").map((el, index) => 
                                 el.includes("<p>") ? 
                                     <p key={index}>{el.replaceAll("<p>", " ").replaceAll("</p>", " ")}</p>
+                                : el.includes("<b>") ? 
+                                    <b key={index}>{el.replaceAll("<b>", " ").replaceAll("</b>", " ")}</b>
                                 : el.includes("<h1>") ?
                                     <h1 key={index}>{el.replaceAll("<h1>", " ").replaceAll("</h1>", " ")}</h1>
                                 : el.includes("<h2>") ? 

@@ -99,6 +99,9 @@
             h1,h2{
                 border-bottom: 1px solid black
             }
+            b{
+                font-weight: 400;
+            }
             h1, h2, p{
                 display: block;
                 font-weight: 200;
@@ -109,11 +112,12 @@
                 margin: 1rem 0;
             }
             img{
+                object-fit: contain;
                 display: inline;
                 justify-content: center;
                 text-align: center;
-                width: 48%;
-                height: 400px;
+                width: 49%;
+                height: 300px;
                 border: 2px solid white;
             }
         }
